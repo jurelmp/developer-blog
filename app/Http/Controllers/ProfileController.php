@@ -33,11 +33,6 @@ class ProfileController extends Controller
     {
         $user = Auth::guard('api')->user();
 
-        if ($user->profile == null) {
-            $profile = new Profile();
-            $user->profile()->save($profile);
-        }
-
         $profile = $user->profile;
         $profile->first_name = $request->post('first_name');
         $profile->last_name = $request->post('last_name');
