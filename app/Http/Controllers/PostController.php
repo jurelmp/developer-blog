@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('user')->get();
+        $posts = Post::with(['comments', 'user'])->get();
         return response()->json([
             'posts' => $posts,
             'status' => 'success'
@@ -37,6 +37,8 @@ class PostController extends Controller
         $user = Auth::guard('api')->user();
         $user->posts()->save($post);
 
+        $post = Post::with(['comments', 'user'])->find($post->id);
+
         return response()->json([
             'post' => $post,
             'status' => 'success'
@@ -51,7 +53,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $post = Post::with('comments')->find($post)->first();
+        $post = Post::with(['comments', 'user'])->find($post->id);
         return response()->json([
             'post' => $post,
             'status' => 'success'

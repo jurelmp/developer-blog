@@ -12,15 +12,13 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 /*
  * Protected api routes
  */
 Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
     Route::apiResources([
         'posts' => 'PostController',
         'posts.comments' => 'CommentController'
@@ -28,4 +26,3 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('profile', 'ProfileController@show')->name('profile.show');
     Route::post('profile', 'ProfileController@update')->name('profile.update');
 });
-
