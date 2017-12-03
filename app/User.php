@@ -56,4 +56,16 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Comment');
     }
+
+    /**
+     * Provide random string value to api_token for this user.
+     *
+     * @param array $options
+     * @return bool
+     */
+    public function save(array $options = [])
+    {
+        $this->attributes['api_token'] = str_random(60);
+        return parent::save($options);
+    }
 }

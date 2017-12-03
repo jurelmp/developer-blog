@@ -23,6 +23,6 @@ class Post extends Model
      */
     public function comments()
     {
-        return $this->belongsToMany('App\Comment', 'post_comment');
+        return $this->belongsToMany('App\Comment', 'post_comment', 'post_id', 'comment_id');
     }
 }

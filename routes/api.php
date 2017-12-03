@@ -16,3 +16,16 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/*
+ * Protected api routes
+ */
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::apiResources([
+        'posts' => 'PostController',
+        'posts.comments' => 'CommentController'
+    ]);
+    Route::get('profile', 'ProfileController@show')->name('profile.show');
+    Route::post('profile', 'ProfileController@update')->name('profile.update');
+});
+
