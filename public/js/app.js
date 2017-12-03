@@ -873,8 +873,6 @@ function PostController(PostService, $log) {
     };
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (blog);
-
 /***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {

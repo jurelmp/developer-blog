@@ -124,5 +124,3 @@ function PostController(PostService, $log) {
         });
     }
 }
-
-export default blog;
